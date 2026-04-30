@@ -1,0 +1,17 @@
+{% extends "blog-temp/base.html" %}
+{% block content %}
+
+<div class="delete-card">
+  <h1>Delete Post</h1>
+  <p>You're about to permanently delete <strong>"{{ post.title }}"</strong>. This cannot be undone.</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <div style="display:flex; gap:0.75rem;">
+      <button type="submit" class="btn-danger-outline">Yes, delete it</button>
+      <a href="{% url 'post-detail' object.id %}" class="btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock content %}

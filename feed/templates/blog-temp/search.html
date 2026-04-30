@@ -1,0 +1,26 @@
+{% extends "blog-temp/base.html" %}
+{% block content %}
+
+<div class="section-label">Search results for "{{ query }}"</div>
+
+{% for post in results %}
+<article class="post-card" style="animation-delay: {{ forloop.counter0 }}00ms">
+  <div class="post-meta-line">
+    <a class="post-author" href="{% url 'user-post-list' post.author.username %}">{{ post.author }}</a>
+    <span class="meta-sep">&mdash;</span>
+    <span class="post-date">{{ post.date_posted|date:"F d, Y" }}</span>
+  </div>
+  <h2 class="post-title">
+    <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
+  </h2>
+  <p class="post-excerpt">{{ post.content|truncatewords:30 }}</p>
+</article>
+
+{% empty %}
+<p style="color: var(--muted); padding: 2rem 0;">
+  No posts found for <strong>"{{ query }}"</strong>. 
+  Try a different search term.
+</p>
+{% endfor %}
+
+{% endblock content %}

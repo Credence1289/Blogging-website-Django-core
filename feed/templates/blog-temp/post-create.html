@@ -1,0 +1,25 @@
+{% extends 'blog-temp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+      <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h2>{% if object %}Edit Post{% else %}New Post{% endif %}</h2>
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button type="submit" class="btn btn-primary">
+                {% if object %}Update{% else %}Post{% endif %}
+              </button>
+              <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "blog-temp/base.html" %}
+{% block content %}
+
+<article class="single-post">
+  <div class="post-meta-line">
+    <a class="post-author" href="{% url 'user-post-list' object.author.username %}">{{ object.author }}</a>
+    <span class="meta-sep">&mdash;</span>
+    <span class="post-date">{{ object.date_posted|date:"F d, Y" }}</span>
+  </div>
+
+  <h1 class="post-title" style="font-family:'Playfair Display',serif; font-size:2.6rem; font-weight:700; line-height:1.2; margin: 0.5rem 0 0;">
+    {{ object.title }}
+  </h1>
+
+  {% if object.author == user %}
+  <div class="post-actions">
+    <a class="btn-secondary" href="{% url 'post-update' object.id %}">Edit</a>
+    <a class="btn-danger-outline" href="{% url 'post-delete' object.id %}">Delete</a>
+  </div>
+  {% endif %}
+
+  <div class="post-content">
+    {{ object.content|linebreaks }}
+  </div>
+</article>
+
+{% endblock content %}
